@@ -1,6 +1,7 @@
 const sqlite3 = require('sqlite3');
 const { open } = require('sqlite');
 const path = require('path');
+require('dotenv').config();
 
 // Open SQLite database connection
 let dbInstance = null;
@@ -9,7 +10,7 @@ async function initDb() {
     if (dbInstance) return dbInstance;
 
     dbInstance = await open({
-        filename: path.join(__dirname, 'database.sqlite'),
+        filename: path.join(__dirname, process.env.DB_FILE || 'database.sqlite'),
         driver: sqlite3.Database
     });
 
