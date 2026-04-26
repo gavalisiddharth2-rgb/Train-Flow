@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome - TrainFlow</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { justify-content: center; align-items: center; }
+        .login-container {
+            width: 100%; max-width: 450px;
+            text-align: center;
+        }
+        .login-card { padding: 3rem 2.5rem; position: relative; }
+        .login-logo { font-size: 2.5rem; margin-bottom: 2rem; justify-content: center; }
+        
+        .role-selector {
+            display: flex; gap: 0.5rem; margin-bottom: 1.5rem;
+            background: #f1f5f9; padding: 0.5rem; border-radius: 1rem;
+        }
+        .role-btn {
+            flex: 1; padding: 0.75rem; border: none; background: transparent; color: var(--text-secondary);
+            border-radius: 0.75rem; cursor: pointer; font-weight: 600; transition: all 0.3s;
+        }
+        .role-btn.active { background: var(--primary-color); color: white; }
+        
+        .auth-toggle {
+            display: flex; margin-bottom: 1.5rem; border-bottom: 2px solid var(--border);
+        }
+        .auth-toggle-btn {
+            flex: 1; padding: 1rem; background: none; border: none; font-weight: 700; font-size: 1.1rem;
+            color: var(--text-secondary); cursor: pointer; transition: all 0.3s;
+            border-bottom: 3px solid transparent; margin-bottom: -2px;
+        }
+        .auth-toggle-btn.active { color: var(--primary-color); border-bottom-color: var(--primary-color); }
+        
+        #registerForm { display: none; }
+        .extra-fields { display: none; }
+    </style>
+</head>
+<body>
+    <div class="container login-container">
+        <div class="glass-card login-card">
+            <a href="#" class="logo login-logo"><i class="fa-solid fa-train"></i> TrainFlow</a>
+            
+            <div class="auth-toggle">
+                <button class="auth-toggle-btn active" onclick="toggleAuthMode('login')" id="tab-login">Login</button>
+                <button class="auth-toggle-btn" onclick="toggleAuthMode('register')" id="tab-register">Sign Up</button>
+            </div>
+            
+            <p style="margin-bottom: 1.5rem; color: var(--text-secondary);">Select your role to continue</p>
+            
+            <div class="role-selector">
+                <button class="role-btn active" onclick="selectRole('Passenger')" id="btn-Passenger">Passenger</button>
+                <button class="role-btn" onclick="selectRole('Supervisor')" id="btn-Supervisor">Supervisor</button>
+                <button class="role-btn" onclick="selectRole('Admin')" id="btn-Admin">Admin</button>
+            </div>
+
+            <!-- LOGIN FORM -->
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <input type="hidden" id="loginRole" value="Passenger">
+                
+                <div class="form-group" style="text-align: left;">
+                    <label id="identifierLabel">Contact Number</label>
+                    <input type="text" id="loginIdentifier" required placeholder="Enter here...">
+                </div>
+                
+                <div class="form-group" style="text-align: left;">
+                    <label>Password</label>
+                    <input type="password" id="loginPassword" required placeholder="Enter Password">
+                </div>
+                
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Login <i class="fa-solid fa-arrow-right"></i></button>
+            </form>
+
+            <!-- REGISTER FORM -->
+            <form id="registerForm" onsubmit="handleRegister(event)">
+                <div class="form-group" style="text-align: left;" id="regNameGroup">
+                    <label>Full Name</label>
+                    <input type="text" id="regName" placeholder="Enter Full Name">
+                </div>
+
+                <div class="form-group extra-fields" style="text-align: left;" id="regAgeGroup">
+                    <label>Age</label>
+                    <input type="number" id="regAge" placeholder="Enter Age">
+                </div>
+
+                <div class="form-group extra-fields" style="text-align: left;" id="regGenderGroup">
+                    <label>Gender</label>
+                    <select id="regGender">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group" style="text-align: left;">
+                    <label id="regIdentifierLabel">Contact Number</label>
+                    <input type="text" id="regIdentifier" required placeholder="Enter here...">
+                </div>
+                
+                <div class="form-group" style="text-align: left;">
+                    <label>Create Password</label>
+                    <input type="password" id="regPassword" required placeholder="Enter Password">
+                </div>
+                
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Create Account <i class="fa-solid fa-user-plus"></i></button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
